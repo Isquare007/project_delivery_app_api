@@ -4,22 +4,22 @@ from pd_app.models import Project, Task, User, Milestone, Issue_Action, Project_
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ('project_id', 'project_name', 'start_date', 'end_date',
-                'ministry', 'contractor', 'local_gov', 'description',
-                'contract_sum', 'status','priority'
-                )
+        fields = ('project_id', 'project_name', 'start_date', 'user_assigned',
+                  'end_date', 'ministry', 'contractor', 'local_gov',
+                  'description', 'contract_sum', 'status','priority'
+                  )
     
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ('task_id', 'task_name', 'project_id', 'start_date',
-                'end_date', 'note', 'status', 'priority'
-                )
+                  'users_assigned', 'end_date', 'note', 'status', 'priority'
+                  )
     
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('user_id', 'user_name', 'project_id', 'role',
+        fields = ('user_id', 'user_name', 'project_assigned', 'role'
                 )
     
 class MilestoneSerializer(serializers.ModelSerializer):
@@ -39,7 +39,7 @@ class Issue_ActionSerializer(serializers.ModelSerializer):
 class Project_documentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project_document
-        fields = ('file_name', 'user_id', 'uploaded_by', 'project_id',
+        fields = ('file_name', 'uploaded_by', 'project_id',
                 'task_id', 'uploaded_at', 'file_url'
                 )
 

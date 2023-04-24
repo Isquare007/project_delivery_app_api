@@ -14,8 +14,8 @@ from django.core.exceptions import ObjectDoesNotExist
 def project_getpost(request):
     """serves 'GET and 'POST request"""
     if request.method == 'GET':
-        projects = Project.objects.all()
-        serialized = ProjectSerializer(projects, many=True)
+        all_projects = Project.objects.all()
+        serialized = ProjectSerializer(all_projects, many=True)
         return Response(serialized.data)
 
     if request.method == 'POST':
@@ -27,10 +27,10 @@ def project_getpost(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def projects(request, id):
+def projects(request, project_id):
     """serves all 'GET', 'PUT', 'DELETE' request"""
     try:
-        project = Project.objects.get(pk=id)
+        project = Project.objects.get(pk=project_id)
     except ObjectDoesNotExist:
         return Response({'error': 'Project not found'}, status=status.HTTP_404_NOT_FOUND)
 
