@@ -68,7 +68,7 @@ Retrieves a list of all tasks.
 POST /projects{project_id}/task
 Creates a new task.
 
-GET /projects{project_id}/task/{task_id}/
+GET /projects{project_id}/task/{task_id}/<br>
 Retrieves the details of a specific task.
 
 PUT /projects{project_id}/task/{task_id}/
