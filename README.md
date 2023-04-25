@@ -1,5 +1,5 @@
 # Project Monitoring API
-## A hackathon project
+## A hackathon project :man_technologist:
 ### This is a Django REST API for a project monitoring application that allows for easy monitoring of ongoing projects. The API uses Django Rest Framework for serialization and validation and CORS headers for cross-origin resource sharing.
 
 ## Installation
@@ -24,10 +24,12 @@ python manage.py loaddata sample_data.json
 python manage.py runserver
 ```
 
-# The API endpoints can be accessed at http://localhost:8000/
+### The API endpoints can be accessed at http://localhost:8000/
 
-Endpoints
-/projects
+## Endpoints
+
+### /projects
+
 GET /project
 Retrieves a list of all projects.
 
@@ -43,43 +45,45 @@ Updates the details of a specific project.
 DELETE /project/{project_id}
 Deletes a specific project.
 
-/users
-GET /users
+### /users
+
+GET /users<br>
 Retrieves a list of all users.
 
-POST /projects{project_id}/user
+POST /projects{project_id}/user<br>
 Creates a new user on a project.
 
-GET /users/{user_id}
-Retrieves the details of a specific user.
-GET /projects{project_id}/user
+GET /users/{user_id}<br>
+Retrieves the details of a specific user.<br>
+GET /projects{project_id}/user<br>
 Retrieves the details of users a specific project.
 
-PUT /projects{project_id}/user/{user_id}
+PUT /projects{project_id}/user/{user_id}<br>
 Updates the details of a specific user.
 
-DELETE /projects{project_id}/user/{user_id}
+DELETE /projects{project_id}/user/{user_id}<br>
 Deletes a specific user.
 
-/tasks
-GET /projects{project_id}/task
+### /tasks
+
+GET /projects{project_id}/task<br>
 Retrieves a list of all tasks.
 
-POST /projects{project_id}/task
+POST /projects{project_id}/task<br>
 Creates a new task.
 
-GET /projects{project_id}/task/{task_id}/<br>
+GET /projects{project_id}/task/{task_id}<br>
 Retrieves the details of a specific task.
 
-PUT /projects{project_id}/task/{task_id}/
+PUT /projects{project_id}/task/{task_id}<br>
 Updates the details of a specific task.
 
-DELETE /projects{project_id}/task/{task_id}/
+DELETE /projects{project_id}/task/{task_id}<br>
 Deletes a specific task.
 
-/teams: CRUD operations for teams
-/milestones: CRUD operations for milestones
-/transactions: CRUD operations for transactions
+/teams: CRUD operations for teams<br>
+/milestones: CRUD operations for milestones<br>
+/transactions: CRUD operations for transactions<br>
 
 You can use a tool like Postman to test the API endpoints, or create a django admin user with
 ```
