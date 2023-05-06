@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 from pd_app.views import project, task, user, milestone
 
 urlpatterns = [
@@ -36,3 +38,5 @@ urlpatterns = [
     path('project/<uuid:project_id>/milestone', milestone.milestone_getpost),
     path('project/<uuid:project_id>/milestone/<uuid:milestone_id>', milestone.milestones),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
