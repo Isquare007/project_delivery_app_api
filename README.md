@@ -26,6 +26,13 @@ python manage.py runserver
 
 ### The API endpoints can be accessed at http://localhost:8000/
 
+### It is also hosted on render at https://pd-api.onrender.com/
+
+## API Documentation at:
+
+### https://pd-api.onrender.com/swagger-ui
+### https://pd-api.onrender.com/api_schema
+
 ## Endpoints
 
 ### /projects
