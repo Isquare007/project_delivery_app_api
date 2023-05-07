@@ -16,15 +16,24 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from rest_framework.schemas import get_schema_view
+from django.views.generic import TemplateView
 
 from pd_app.views import project, task, user, milestone
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api_schema', get_schema_view(title='API Schema',
+         description='Guide for the rest api'), name='api_schema'),
+    path('swagger-ui/', TemplateView.as_view(
+        template_name='docs.html',
+        extra_context={'schema_url': 'api_schema'}
+    ), name='swagger-ui'
+    ),
     # project urls
     path('project', project.project_getpost),
     path('project/<uuid:project_id>', project.projects),
-    #tasks urls
+    # tasks urls
     path('project/<uuid:project_id>/task', task.task_getpost),
     path('project/<uuid:project_id>/task/<uuid:task_id>', task.tasks),
     # user urls
@@ -36,7 +45,8 @@ urlpatterns = [
     path('milestones', milestone.list_milestones),
     path('milestones/<uuid:milestone_id>', milestone.list_milestones),
     path('project/<uuid:project_id>/milestone', milestone.milestone_getpost),
-    path('project/<uuid:project_id>/milestone/<uuid:milestone_id>', milestone.milestones),
+    path('project/<uuid:project_id>/milestone/<uuid:milestone_id>',
+         milestone.milestones),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
