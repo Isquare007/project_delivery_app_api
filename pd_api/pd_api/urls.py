@@ -29,7 +29,7 @@ urlpatterns = [
          description='Documentation for the Project Delivery app rest api'), name='Project Delivery API'),
     path('swagger-ui/', TemplateView.as_view(
         template_name='docs.html',
-        extra_context={'schema_url': 'api_schema'}
+        extra_context={'schema_url': 'Project Delivery API'}
     ), name='swagger-ui'
     ),
     # project urls
