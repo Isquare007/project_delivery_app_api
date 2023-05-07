@@ -19,12 +19,14 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from rest_framework.schemas import get_schema_view
 from django.views.generic import TemplateView
 
-from pd_app.views import project, task, user, milestone
+from pd_app.views import project, task, user, milestone, home
 
 urlpatterns = [
+    # path('', admin.site.urls),
     path('admin/', admin.site.urls),
-    path('api_schema', get_schema_view(title='API Schema',
-         description='Guide for the rest api'), name='api_schema'),
+    path('', home.home, name='home'),
+    path('api_schema', get_schema_view(title='Project Delivery API',
+         description='Documentation for the Project Delivery app rest api'), name='Project Delivery API'),
     path('swagger-ui/', TemplateView.as_view(
         template_name='docs.html',
         extra_context={'schema_url': 'api_schema'}
