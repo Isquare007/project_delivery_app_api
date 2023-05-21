@@ -14,15 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from rest_framework.schemas import get_schema_view
 from django.views.generic import TemplateView
 
-from pd_app.views import project, task, user, milestone, home
+from pd_app.views import project, task, user, milestone, home, auth
 
 urlpatterns = [
-    # path('', admin.site.urls),
+    path('', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('', home.home, name='home'),
     path('api_schema', get_schema_view(title='Project Delivery API',
@@ -32,7 +32,11 @@ urlpatterns = [
         extra_context={'schema_url': 'Project Delivery API'}
     ), name='swagger-ui'
     ),
+    # auth urls
+    path('register/', auth.register, name='register'),
+    path('login/', auth.user_login, name='login'),
     # project urls
+    path('project_home', project.project_home),
     path('project', project.project_getpost),
     path('project/<uuid:project_id>', project.projects),
     # tasks urls

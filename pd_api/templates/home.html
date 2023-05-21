@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
   <title>README</title>
   <style>
     html {
       color: #1a1a1a;
       background-color: #fdfdfd;
     }
-    body {
+    {% comment %} body {
       margin: 0;
       max-width: 36em;
       padding-left: 50px;
@@ -21,7 +20,7 @@
       overflow-wrap: break-word;
       text-rendering: optimizeLegibility;
       font-kerning: normal;
-    }
+    } {% endcomment %}
  
     @media (max-width: 600px) {
       body {
@@ -227,5 +226,4 @@ transactions<br></p>
 <p>You can use a tool like Postman to test the API endpoints, or create
 a django admin user with</p>
 <pre><code>python manage.py createsuperuser</code></pre>
-</body>
-</html>
+{% endblock %}

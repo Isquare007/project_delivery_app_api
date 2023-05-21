@@ -1,0 +1,30 @@
+/* styles.css */
+.project-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.project {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.project h2 {
+    color: #b53030;
+}
+
+.project .description {
+    color: #666;
+}
+
+.project .details {
+    margin-top: 10px;
+}
+
+.project .details p {
+    margin-bottom: 5px;
+}
+
+/* Add more styles as needed */

@@ -1,14 +1,27 @@
 """project views"""
 from pd_app.models import Project
 from pd_app.serializer import ProjectSerializer
+from django.contrib.auth.decorators import login_required
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render
 
 
 # Create your views here.
+
+@login_required(login_url='/login')
+def project_home(request):
+    if request.method == 'GET':
+        all_projects = Project.objects.all()
+        serialized = ProjectSerializer(all_projects, many=True)
+        context = {
+            'projects': serialized.data
+        }
+        return render(request, 'project_home.html', context)
+
 
 @api_view(['GET', 'POST'])
 def project_getpost(request):

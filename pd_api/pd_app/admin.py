@@ -1,5 +1,5 @@
 from django.contrib import admin
-from pd_app.models import Project, Task, User, Milestone, Issue_Action, Project_document, Team, Transaction, Message 
+from pd_app.models import Project, Task, Milestone, Issue_Action, Project_document, Team, Transaction, Message, CustomUser
 
 # Register your models here.
 
@@ -9,8 +9,8 @@ class ProjectAdmin(admin.ModelAdmin):
 class TaskAdmin(admin.ModelAdmin):
     pass
 
-class UserAdmin(admin.ModelAdmin):
-    pass
+# class UserAdmin(admin.ModelAdmin):
+#     pass
 
 class MilestoneAdmin(admin.ModelAdmin):
     pass
@@ -30,12 +30,16 @@ class TransactionAdmin(admin.ModelAdmin):
 class MessageAdmin(admin.ModelAdmin):
     pass
 
+class CustomUserAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Task, TaskAdmin)
-admin.site.register(User, UserAdmin)
+# admin.site.register(User, UserAdmin)
 admin.site.register(Milestone, MilestoneAdmin)
 admin.site.register(Issue_Action, Issue_ActionAdmin)
 admin.site.register(Project_document, Project_documentAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Transaction, TransactionAdmin)
 admin.site.register(Message, MessageAdmin)
+admin.site.register(CustomUser, CustomUserAdmin)

@@ -2,6 +2,8 @@ from enum import Enum
 import uuid
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 class Status(Enum):
     """status enumerator"""
@@ -21,11 +23,14 @@ class Schedule(Enum):
     
 # Create your models here.
 
+
+
+
 class Project(models.Model):
     """stores a project information"""
     project_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     project_name = models.CharField(max_length=500)
-    user_assigned = models.ManyToManyField('User', blank=True, related_name='projects')
+    user_assigned = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='projects')
     start_date = models.DateField()
     end_date = models.DateField()
     ministry = models.CharField(max_length=500)
@@ -43,13 +48,18 @@ class Project(models.Model):
     def __str__(self) -> str:
         return (f'{self.project_id} ({self.project_name})')
         # return str(self.project_id)
+
+class CustomUser(AbstractUser):
+    # Add custom fields or override existing fields if needed
+    project = models.ForeignKey(Project, on_delete=models.CASCADE,  null=True, blank=True)
+    role = models.CharField(max_length=200)
     
 class Task(models.Model):
     """stores information of tasks"""
     task_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     task_name = models.CharField(max_length=500)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='tasks')
-    users_assigned = models.ManyToManyField('User', blank=True, related_name='tasks')
+    users_assigned = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='tasks')
     start_date = models.DateField()
     end_date = models.DateField()
     note = models.CharField(max_length=500)
@@ -63,17 +73,17 @@ class Task(models.Model):
     def __str__(self) -> str:
         return (f'{self.task_id} ({self.task_name})')
     
-class User(models.Model):
-    """stores a user information"""
-    user_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user_name = models.CharField(max_length=500)
-    project_assigned = models.ManyToManyField(Project, related_name='users')
-    role = models.CharField(max_length=500)
+# class User(models.Model):
+#     """stores a user information"""
+#     user_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+#     user_name = models.CharField(max_length=500)
+#     project_assigned = models.ManyToManyField(Project, related_name='users')
+#     role = models.CharField(max_length=500)
     
-    objects = models.Manager()
+#     objects = models.Manager()
     
-    def __str__(self) -> str:
-        return self.user_name + " " + self.role
+#     def __str__(self) -> str:
+#         return self.user_name + " " + self.role
     
 class Milestone(models.Model):
     """stores information about a milestone"""
@@ -108,7 +118,7 @@ class Issue_Action(models.Model):
 class Project_document(models.Model):
     """stores project document data"""
     file_name = models.CharField(max_length=500)
-    uploaded_by = models.ForeignKey(User, on_delete=models.PROTECT, related_name='pd')
+    uploaded_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='pd')
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='pd')
     task_id = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='pd')
     uploaded_at = models.DateField()
@@ -147,10 +157,11 @@ class Transaction(models.Model):
 class Message(models.Model):
     """message information"""
     message_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='message')
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='message')
     content = models.CharField(max_length=2500)
     
     objects = models.Manager()
     
     def __str__(self) -> str:
         return self.user_id + " " + self.content
+

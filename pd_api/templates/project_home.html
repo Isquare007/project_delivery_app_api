@@ -1,0 +1,25 @@
+<!-- project_home.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Project Home
+{% endblock %}
+
+{% block content %}
+    <h1>All Projects</h1>
+    <div class="project-list">
+        {% for project in projects %}
+            <div class="project">
+                <h2>{{ project.project_name }}</h2>
+                <p class="description">{{ project.description }}</p>
+                <div class="details">
+                    <p><strong>Contract Sum:</strong> {{ project.contract_sum }}</p>
+                    <p><strong>Ministry:</strong> {{ project.ministry }}</p>
+                    <p><strong>Local Gov:</strong> {{ project.local_gov }}</p>
+                    <p><strong>Start Date:</strong> {{ project.start_date }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

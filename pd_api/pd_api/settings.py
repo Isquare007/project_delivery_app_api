@@ -34,17 +34,24 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
+    'corsheaders',
+    'pd_app.apps.PdAppConfig',
+    'rest_framework_swagger',
+    "crispy_forms",
+    "crispy_bootstrap5",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'corsheaders',
-    'pd_app.apps.PdAppConfig',
-    'rest_framework_swagger'
+    
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -78,6 +85,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'pd_api.wsgi.application'
+
+AUTH_USER_MODEL = 'pd_app.CustomUser'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login'
 
 
 # Database
@@ -127,8 +138,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
 MEDIA_URL = "media/"
 
 # Default primary key field type

@@ -1,5 +1,10 @@
 from rest_framework import serializers
-from pd_app.models import Project, Task, User, Milestone, Issue_Action, Project_document, Team, Transaction, Message
+from pd_app.models import Project, Task, Milestone, Issue_Action, Project_document, Team, Transaction, Message, CustomUser
+
+class CustomUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'username', 'project', 'role']
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,11 +21,11 @@ class TaskSerializer(serializers.ModelSerializer):
                   'users_assigned', 'end_date', 'note', 'status', 'priority'
                   )
     
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('user_id', 'user_name', 'project_assigned', 'role'
-                )
+# class UserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ('user_id', 'user_name', 'project_assigned', 'role'
+#                 )
     
 class MilestoneSerializer(serializers.ModelSerializer):
     class Meta:
