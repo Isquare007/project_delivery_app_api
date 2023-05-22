@@ -10,3 +10,6 @@ django-cors-headers==3.8.0
 django-rest-swagger
 uritemplate
 pyyaml
+django-bootstrap-v5
+django-crispy-forms
+crispy-bootstrap5
